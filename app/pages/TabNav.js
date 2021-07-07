@@ -6,6 +6,8 @@ import HomeScreen from './HomePage';
 import MessageScreen from './Message';
 import MineScreen from './Mine';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {Image} from 'react-native';
+import px2dp from '../util/DisplayUtil';
 
 export default function Navigation({colorScheme}) {
   return (
@@ -13,7 +15,19 @@ export default function Navigation({colorScheme}) {
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
           if (route.name === 'index') {
-            return <AntDesign name="home" size={size} color={color} />;
+            let icon;
+            icon = focused ? (
+              <Image
+                source={require('../images/home_select.png')}
+                style={{width: 22, height: 22}}
+              />
+            ) : (
+              <Image
+                source={require('../images/home_unselect.png')}
+                style={{width: px2dp(22), height: px2dp(22)}}
+              />
+            );
+            return icon;
           } else if (route.name === 'contact') {
             return <AntDesign name="cloudo" size={size} color={color} />;
           } else if (route.name === 'message') {
